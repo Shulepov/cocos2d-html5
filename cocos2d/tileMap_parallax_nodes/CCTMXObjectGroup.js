@@ -105,7 +105,7 @@ cc.TMXObjectGroup = cc.Class.extend(/** @lends cc.TMXObjectGroup# */{
      * @param {String} objectName
      * @return {object|Null}
      */
-    objectNamed:function (objectName) {
+    getObject:function (objectName) {
         if (this._objects && this._objects.length > 0) {
             var locObjects = this._objects;
             for (var i = 0, len = locObjects.length; i < len; i++) {

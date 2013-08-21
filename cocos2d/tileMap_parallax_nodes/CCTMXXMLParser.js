@@ -715,16 +715,20 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
                         var polygonProps = selObj.querySelectorAll("polygon");
                         if(polygonProps && polygonProps.length > 0) {
                             var selPgPointStr = polygonProps[0].getAttribute('points');
-                            if(selPgPointStr)
-                                objectProp["polygonPoints"] = this._parsePointsString(selPgPointStr);
+                            if(selPgPointStr) {
+                                objectProp["points"] = this._parsePointsString(selPgPointStr);
+                                objectgroup["shape"] = "polygon";
+                            }
                         }
 
                         //polyline
                         var polylineProps = selObj.querySelectorAll("polyline");
                         if(polylineProps && polylineProps.length > 0) {
                             var selPlPointStr = polylineProps[0].getAttribute('points');
-                            if(selPlPointStr)
-                                objectProp["polylinePoints"] = this._parsePointsString(selPlPointStr);
+                            if(selPlPointStr) {
+                                objectProp["points"] = this._parsePointsString(selPlPointStr);
+                                objectProp["shape"] = "polyline";
+                            }
                         }
 
                         // Add the object to the objectGroup
@@ -746,7 +750,7 @@ cc.TMXMapInfo = cc.SAXParser.extend(/** @lends cc.TMXMapInfo# */{
         var pointsStr = pointsString.split(' ');
         for(var i = 0; i < pointsStr.length; i++){
             var selPointStr = pointsStr[i].split(',');
-            points.push({'x':selPointStr[0], 'y':selPointStr[1]});
+            points.push({'x':parseInt(selPointStr[0]), 'y':parseInt(selPointStr[1])});
         }
         return points;
     },

@@ -307,7 +307,7 @@ cc.TMXTiledMap = cc.Node.extend(/** @lends cc.TMXTiledMap# */{
      * @param {Number} GID
      * @return {object}
      */
-    propertiesForGID:function (GID) {
+    getPropertiesForGID:function (GID) {
         return this._tileProperties[GID];
     },
 
