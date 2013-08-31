@@ -523,9 +523,9 @@ cc.SpriteCanvas = cc.NodeRGBA.extend(/** @lends cc.SpriteCanvas# */{
                 //continue moving element downwards while zOrder is smaller or when zOrder is the same but mutatedIndex is smaller
                 while (j >= 0 && ( tempItem._zOrder < tempChild._zOrder ||
                     ( tempItem._zOrder == tempChild._zOrder && tempItem._orderOfArrival < tempChild._orderOfArrival ))) {
-                    tempChild =  locChildren[j];
                     locChildren[j + 1] = tempChild;
                     j = j - 1;
+                    tempChild =  locChildren[j];
                 }
                 locChildren[j + 1] = tempItem;
             }
@@ -969,7 +969,6 @@ cc.SpriteCanvas = cc.NodeRGBA.extend(/** @lends cc.SpriteCanvas# */{
         cc.Assert(filename != null, "Sprite#initWithFile():Invalid filename for sprite");
         var texture = cc.TextureCache.getInstance().textureForKey(filename);
         if (!texture) {
-            filename = cc.FileUtils.getInstance().fullPathForFilename(filename);
             texture = cc.TextureCache.getInstance().addImage(filename);
             return this.initWithTexture(texture, rect);
         } else {
@@ -1051,6 +1050,8 @@ cc.SpriteCanvas = cc.NodeRGBA.extend(/** @lends cc.SpriteCanvas# */{
         var locRect = this._rect;
         if (!locRect) {
             locRect = cc.rect(0, 0, 0, 0);
+            locRect.size = sender.getContentSize();
+        } else if(cc._rectEqualToZero(locRect)){
             locRect.size = sender.getContentSize();
         }
         this._originalTexture = sender;
@@ -1333,11 +1334,11 @@ cc.SpriteCanvas = cc.NodeRGBA.extend(/** @lends cc.SpriteCanvas# */{
             var image = this._texture.getHtmlElementObj();
             if (this._colorized) {
                 context.drawImage(image,
-                    0, 0, locRect.width, locRect.height,
+                    0, 0, 0 | locRect.width, 0 | locRect.height,
                     flipXOffset, flipYOffset, locRect.width, locRect.height);
             } else {
                 context.drawImage(image,
-                    locRect.x, locRect.y, locRect.width, locRect.height,
+                    0 | locRect.x, 0 | locRect.y, 0 | locRect.width, 0 | locRect.height,
                     flipXOffset, flipYOffset, locRect.width, locRect.height);
             }
         } else if (locContentSize.width !== 0) {
@@ -1629,9 +1630,9 @@ cc.SpriteWebGL = cc.NodeRGBA.extend(/** @lends cc.SpriteWebGL# */{
                 //continue moving element downwards while zOrder is smaller or when zOrder is the same but mutatedIndex is smaller
                 while (j >= 0 && ( tempItem._zOrder < tempChild._zOrder ||
                     ( tempItem._zOrder == tempChild._zOrder && tempItem._orderOfArrival < tempChild._orderOfArrival ))) {
-                    tempChild =  locChildren[j];
                     locChildren[j + 1] = tempChild;
                     j = j - 1;
+                    tempChild =  locChildren[j];
                 }
                 locChildren[j + 1] = tempItem;
             }
@@ -2179,6 +2180,8 @@ cc.SpriteWebGL = cc.NodeRGBA.extend(/** @lends cc.SpriteWebGL# */{
         var locRect = this._rect;
         if (!locRect) {
             locRect = cc.rect(0, 0, 0, 0);
+            locRect.size = sender.getContentSize();
+        } else if(cc._rectEqualToZero(locRect)){
             locRect.size = sender.getContentSize();
         }
 
