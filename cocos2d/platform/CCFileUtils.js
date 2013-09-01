@@ -188,7 +188,7 @@ cc.FileUtils = cc.Class.extend({
             xhr.setRequestHeader("Accept-Charset", "x-user-defined");
             xhr.onreadystatechange = function (event) {
                 if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
+                    if (xhr.status == 200 || xhr.status == 0) {
                         var fileContents = cc._convertResponseBodyToText(xhr["responseBody"]);
                         if (fileContents)
                             selfPointer._fileDataCache[fileUrl] = selfPointer._stringConvertToArray(fileContents);
@@ -204,7 +204,7 @@ cc.FileUtils = cc.Class.extend({
 
             xhr.onreadystatechange = function (event) {
                 if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
+                    if (xhr.status == 200 || xhr.status == 0) {
                         var fileContents = xhr.responseText;
                         if (fileContents)
                             selfPointer._fileDataCache[fileUrl] = selfPointer._stringConvertToArray(fileContents);
@@ -225,7 +225,7 @@ cc.FileUtils = cc.Class.extend({
         if (/msie/i.test(navigator.userAgent) && !/opera/i.test(navigator.userAgent)) {
             req.setRequestHeader("Accept-Charset", "x-user-defined");
             req.send(null);
-            if (req.status != 200)
+            if (!(req.status == 200 || req.status == 0))
                 return null;
 
             var fileContents = cc._convertResponseBodyToText(req["responseBody"]);
@@ -237,7 +237,7 @@ cc.FileUtils = cc.Class.extend({
             if (req.overrideMimeType)
                 req.overrideMimeType('text\/plain; charset=x-user-defined');
             req.send(null);
-            if (req.status != 200)
+            if (!(req.status == 200 || req.status == 0))
                 return null;
 
             arrayInfo = this._stringConvertToArray(req.responseText);
@@ -277,7 +277,7 @@ cc.FileUtils = cc.Class.extend({
         }
         xhr.onreadystatechange = function (event) {
             if (xhr.readyState == 4) {
-                if (xhr.status == 200) {
+                if (xhr.status == 200 || xhr.status == 0) {
                     var fileContents = xhr.responseText;
                     if (fileContents)
                         selfPointer._textFileCache[fileUrl] = fileContents;
@@ -301,7 +301,7 @@ cc.FileUtils = cc.Class.extend({
                 req.overrideMimeType('text\/plain; charset=utf-8');
         }
         req.send(null);
-        if (req.status != 200)
+        if (!(req.status == 200 || req.status == 0))
             return null;
 
         fileContents = req.responseText;
