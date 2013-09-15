@@ -87,10 +87,10 @@ cc.Scale9Sprite = cc.Node.extend(/** @lends cc.Scale9Sprite# */{
         if (locInsetLeft === 0 && locInsetTop === 0 && locInsetRight === 0 && locInsetBottom === 0) {
             insets = cc.RectZero();
         } else {
-            insets = this._spriteFrameRotated ? cc.RectMake(locInsetBottom, locInsetLeft,
+            insets = this._spriteFrameRotated ? cc.rect(locInsetBottom, locInsetLeft,
                 locSpriteRect.width - locInsetRight - locInsetLeft,
                 locSpriteRect.height - locInsetTop - locInsetBottom) :
-                cc.RectMake(locInsetLeft, locInsetTop,
+                cc.rect(locInsetLeft, locInsetTop,
                     locSpriteRect.width - locInsetLeft - locInsetRight,
                     locSpriteRect.height - locInsetTop - locInsetBottom);
         }
@@ -726,7 +726,9 @@ cc.Scale9Sprite = cc.Node.extend(/** @lends cc.Scale9Sprite# */{
         if (this._spritesGenerated) {
             // Restore color and opacity
             this.setOpacity(opacity);
-            this.setColor(color);
+            if(color.r !== 255 || color.g !== 255 || color.b !== 255){
+                this.setColor(color);
+            }
         }
         this._spritesGenerated = true;
         return true;
