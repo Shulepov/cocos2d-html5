@@ -64,6 +64,7 @@
         'support/CCTGAlib.js',
         'support/CCPNGReader.js',
         'support/CCTIFFReader.js',
+        'support/CCNotificationCenter.js',
         'support/component/CCComponent.js',
         'support/component/CCComponentContainer.js',
         'shaders/CCShaders.js',
