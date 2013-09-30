@@ -1328,8 +1328,8 @@ cc.Node = cc.Class.extend(/** @lends cc.Node# */{
      *    If you are running 7 Sequences of 2 actions, it will return 7.
      * @return {Number} The number of actions that are running plus the ones that are schedule to run
      */
-    numberOfRunningActions:function () {
-        return this.getActionManager().numberOfRunningActionsInTarget(this);
+    getNumberOfRunningActions:function () {
+        return this.getActionManager().getNumberOfRunningActionsInTarget(this);
     },
 
     // cc.Node - Callbacks

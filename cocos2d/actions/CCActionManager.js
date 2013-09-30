@@ -223,7 +223,7 @@ cc.ActionManager = cc.Class.extend({
      * @param {object} target
      * @return {Number}
      */
-    numberOfRunningActionsInTarget:function (target) {
+    getNumberOfRunningActionsInTarget:function (target) {
         var element = this._searchElementByTarget(this._targets, target);
         if (element)
             return (element.actions) ? element.actions.length : 0;

@@ -366,6 +366,13 @@ cc.ScrollView = cc.Layer.extend({
         this._delegate = delegate;
     },
 
+    setZoomMinScale:function(minZoomScale){
+        this._minScale = minZoomScale;
+    },
+    setZoomMaxScale:function(maxZoomScale){
+        this._maxScale = maxZoomScale;
+    },
+
     /** override functions */
     // optional
     onTouchBegan:function (touch, event) {
